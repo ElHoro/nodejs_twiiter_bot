@@ -1,0 +1,14 @@
+{
+  "name": "leviosa-bot",
+  "version": "1.0.0",
+  "description": "a quick twitter bot",
+  "main": "twitterBot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "twit": "^2.2.9"
+  }
+}
