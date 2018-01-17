@@ -14,24 +14,41 @@ const Twitter = new twit(config);
 let readTweets = function()
 {
     let params = {
-        q: 'leviosa',
-        result_type: 'recent',
+        count: 10
+    }
+
+    if(global.lastTweetId > 0) {
+      params = {
         since_id: global.lastTweetId
+      }
     }
 
   // search through all tweets using our params and execute a function:
-  Twitter.get('search/tweets', params, function(err, data) {
+  Twitter.get('statuses/mentions_timeline', params, function(err, data) {
         // if there is no error
         if (!err) {
-          global.lastTweetId = data.statuses[0].id_str;
-          console.log("Last tweet registered: " + global.lastTweetId);
-          // loop through the first 4 returned tweets
-          for (let i = 0; i < 10; i++) {
-          // iterate through those first four defining a rtId that is equal to the value of each of those tweets' ids
-          let rtId = data.statuses[i].id_str;
-          let name = data.statuses[i].user.screen_name;
-          //TODO: make something.
-        }
+          if (data.length > 0) {
+            global.lastTweetId = data[0].id_str;
+            console.log("Last tweet registered: " + global.lastTweetId);
+            console.log("Tweets received in this interval :" + data.length);
+            // loop through the first 4 returned tweets
+            for (let i = 0; i < data.length; i++) {
+              // iterate through those first four defining a rtId that is equal to the value of each of those tweets' ids
+              let tId = data[i].id_str;
+              Twitter.post('favorites/create/:id', {
+                id: tId
+              }, function(err, response) {
+                if (response) {
+                  console.log('Successfully liked');
+                }
+                if (err) {
+                  console.log(err);
+                }
+              })
+            }
+          } else {
+            console.log("No tweets receiven in this interval");
+          }
       } else {
           // catch all log if the search could not be executed
           console.log('Could not search tweets.');
@@ -39,4 +56,4 @@ let readTweets = function()
     });
 }
 readTweets();
-setInterval(readTweets, (60 * 60 * 1000));
+setInterval(readTweets, (1 * 60 * 1000));
