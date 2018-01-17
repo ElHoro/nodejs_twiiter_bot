@@ -1,6 +1,6 @@
 // define the dependencies
 const twit = require('twit');
-let global.lastTweetId = 0;
+global.lastTweetId = 0;
 
 const config = {
   consumer_key: process.env.consumer_key,
