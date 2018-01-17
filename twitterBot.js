@@ -13,7 +13,7 @@ const Twitter = new twit(config);
 let retweet = function() {
     let params = {
         q: 'leviosa',
-        result_type: 'mixed',
+        result_type: 'recent',
         lang: 'en'
     }
 
@@ -29,7 +29,7 @@ Twitter.get('search/tweets', params, function(err, data) {
             // the post action
           console.log(rtId);
           Twitter.post('statuses/update', {
-            status: '@'+name+' You’re saying it wrong,’ Harry heard Hermione snap. ‘It’s Wing-GAR-dium Levi-O-sa, make the “gar” nice and long.',
+            status: '@'+name+' You’re saying it wrong, It’s Wing-GAR-dium Levi-O-sa, make the “gar” nice and long.',
             // setting the id equal to the rtId variable
             in_reply_to_status_id: rtId
             // log response and log error
