@@ -23,7 +23,7 @@ let readTweets = function()
   Twitter.get('search/tweets', params, function(err, data) {
         // if there is no error
         if (!err) {
-          global.lastTweetId = data.statused[0].id_str;
+          global.lastTweetId = data.statuses[0].id_str;
           console.log("Last tweet registered: " + global.lastTweetId);
           // loop through the first 4 returned tweets
           for (let i = 0; i < 10; i++) {
