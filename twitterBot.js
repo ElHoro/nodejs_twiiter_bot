@@ -90,5 +90,5 @@ let main = function()
       }
     });
 }
-
+main();
 setInterval(main, (60 * 60 * 1000));
