@@ -11,7 +11,23 @@ const config = {
 
 const Twitter = new twit(config);
 
-let readTweets = function()
+let getAnswer = function()
+{
+  let answerNumber = Math.floor((Math.random() * 3) + 1);
+
+  switch(answerNumber) {
+    case 1:
+      return 'You’re saying it wrong, It’s Wing-GAR-dium Levi-O-sa, make the “gar” nice and long.';
+    case 2:
+      return 'Swish and flick, remember, swish and flick.';
+    case 3:
+      return 'Never forget Wizard Baruffio, who said ‘s’ instead of ‘f’ and found himself on the floor with a buffalo on his chest.'
+    default:
+     return 'You do it, then, if you’re so clever'
+  }
+}
+
+let main = function()
 {
     let params = {
         count: 10
@@ -31,29 +47,48 @@ let readTweets = function()
             global.lastTweetId = data[0].id_str;
             console.log("Last tweet registered: " + global.lastTweetId);
             console.log("Tweets received in this interval :" + data.length);
-            // loop through the first 4 returned tweets
-            for (let i = 0; i < data.length; i++) {
-              // iterate through those first four defining a rtId that is equal to the value of each of those tweets' ids
-              let tId = data[i].id_str;
-              Twitter.post('favorites/create/:id', {
-                id: tId
-              }, function(err, response) {
-                if (response) {
-                  console.log('Successfully liked');
-                }
-                if (err) {
-                  console.log(err);
-                }
-              })
-            }
           } else {
             console.log("No tweets receiven in this interval");
           }
-      } else {
+        } else {
           // catch all log if the search could not be executed
           console.log('Could not search tweets.');
         }
+    }).then(function(data) {
+      let tweets = data.data;
+      // loop through the returned tweets
+      for (let i = 0; i < tweets.length; i++) {
+        // iterate through those first four defining a rtId that is equal to the value of each of those tweets' ids
+        let tId = tweets[i].id_str;
+        if (tweets[i].favorited) {
+          console.log('already liked ' + tweets[i].user.name + ' tweet.');
+          continue;
+        }
+        //Like tweet
+        Twitter.post('favorites/create', {
+          id: tId
+        }, function(err, response) {
+          if (response) {
+            console.log('Successfully liked ' + tweets[i].user.name + ' tweet.');
+          }
+          if (err) {
+            console.log(err);
+          }
+        });
+        //answer tweet
+        Twitter.post('statuses/update', {
+            status: '@'+tweets[i].user.screen_name+' '+getAnswer(),
+            in_reply_to_status_id: tweets[i].id_str
+        }, function(err, response) {
+          if (response) {
+            console.log('Successfully answered ' + tweets[i].user.name + ' tweet.');
+          }
+          if (err) {
+            console.log(err);
+          }
+        });
+      }
     });
 }
-readTweets();
-setInterval(readTweets, (1 * 60 * 1000));
+
+setInterval(main, (60 * 60 * 1000));
