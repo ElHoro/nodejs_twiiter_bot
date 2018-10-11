@@ -3,10 +3,10 @@ const twit = require('twit');
 global.lastTweetId = 0;
 
 const config = {
-  consumer_key: process.env.consumer_key,
-  consumer_secret: process.env.consumer_secret,
-  access_token: process.env.access_token,
-  access_token_secret: process.env.access_token_secret
+  CONSUMER_KEY: process.env.CONSUMER_KEY,
+  CONSUMER_SECRET: process.env.CONSUMER_SECRET,
+  ACCESS_TOKEN: process.env.ACCESS_TOKEN,
+  ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET
 }
 
 const Twitter = new twit(config);

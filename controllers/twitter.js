@@ -6,10 +6,10 @@ if (process.env.NODE_ENV !== 'production') {
 const request = require('request');
 
 const twitter_oauth = {
-    consumer_key: process.env.consumer_key,
-    consumer_secret: process.env.consumer_secret,
-    token: process.env.access_token,
-    token_secret: process.env.access_token_secret
+    CONSUMER_KEY: process.env.CONSUMER_KEY,
+    CONSUMER_SECRET: process.env.CONSUMER_SECRET,
+    TOKEN: process.env.ACCESS_TOKEN,
+    TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET
   }
 
 let getAnswer = function(){
@@ -27,8 +27,8 @@ let getAnswer = function(){
     }
 }
 
-function getChallengeResponse(crc_token, consumer_secret){
-    let hmac = crypto.createHmac('sha256', consumer_secret).update(crc_token).digest('base64')
+function getChallengeResponse(crc_token, CONSUMER_SECRET){
+    let hmac = crypto.createHmac('sha256', CONSUMER_SECRET).update(crc_token).digest('base64')
   
     return hmac
 }
@@ -36,9 +36,9 @@ function getChallengeResponse(crc_token, consumer_secret){
 function webhookChallenge(req, res){
   const crcToken = req.query.crc_token;
   console.log('webhook received ' + crcToken);
-  var response = getChallengeResponse(crcToken, process.env.consumer_secret)
+  var response = getChallengeResponse(crcToken, process.env.CONSUMER_SECRET)
 
-  res.status(200).send({'response_token': 'sha256='+response});
+  res.status(200).send({'response_TOKEN': 'sha256='+response});
 }
 
 function getWebhook(req, res){
@@ -58,7 +58,7 @@ function getWebhook(req, res){
 
             // POST request to send Direct Message
             request.post(like_request_options, function (error, response, body) {
-                console.log("Liked: " +body.favorited);
+                console.log("Tweet Liked");
             });
 
             const tweet_request_options = {
@@ -74,7 +74,7 @@ function getWebhook(req, res){
             }
 
             request.post(tweet_request_options, function (error, response, body) {
-                console.log("Answered: "+body);
+                console.log("Answered");
             });
         }
     }
@@ -83,7 +83,7 @@ function getWebhook(req, res){
 }
 
 function registerWebhook(req, res){
-    console.log(req.body.url);
+    console.log("Registering hook: "+req.body.url);
 
     // request options
    const request_options = {
@@ -105,7 +105,7 @@ function registerWebhook(req, res){
 }
 
 function removeWebhook(req, res){
-    console.log(req.query.id);
+    console.log("Removing hook "+req.query.id);
 
     // request options
     const request_options = {
