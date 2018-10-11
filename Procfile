@@ -1,1 +1,1 @@
-worker: node twitterBot.js
+worker: npm run start

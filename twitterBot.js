@@ -21,9 +21,9 @@ let getAnswer = function()
     case 2:
       return 'Swish and flick, remember, swish and flick.';
     case 3:
-      return 'Never forget Wizard Baruffio, who said ‘s’ instead of ‘f’ and found himself on the floor with a buffalo on his chest.'
+      return 'Never forget Wizard Baruffio, who said ‘s’ instead of ‘f’ and found himself on the floor with a buffalo on his chest.';
     default:
-     return 'You do it, then, if you’re so clever'
+     return 'You do it, then, if you’re so clever';
   }
 }
 
