@@ -6,10 +6,10 @@ if (process.env.NODE_ENV !== 'production') {
 const request = require('request');
 
 const twitter_oauth = {
-    CONSUMER_KEY: process.env.CONSUMER_KEY,
-    CONSUMER_SECRET: process.env.CONSUMER_SECRET,
-    TOKEN: process.env.ACCESS_TOKEN,
-    TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET
+    consumer_key: process.env.CONSUMER_KEY,
+    consumer_secret: process.env.CONSUMER_SECRET,
+    token: process.env.ACCESS_TOKEN,
+    token_secret: process.env.ACCESS_TOKEN_SECRET
   }
 
 let getAnswer = function(){
@@ -136,7 +136,7 @@ function removeWebhook(req, res){
 }
 
 function activateWebhook(req, res){
-    console.log("Activating hook");
+    console.log("Activating hook "+req.query.id);
 
     const request_options = {
         url: 'https://api.twitter.com/1.1/account_activity/all/dev/webhooks/'+req.query.id+'.json',
