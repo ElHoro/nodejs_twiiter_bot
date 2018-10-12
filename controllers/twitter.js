@@ -58,7 +58,12 @@ function getWebhook(req, res){
 
             // POST request to send Direct Message
             request.post(like_request_options, function (error, response, body) {
-                console.log("Tweet Liked");
+                console.log("Liking tweet.")
+                if(JSON.parse(response.body).errors){
+                    console.log(JSON.parse(response.body).errors[0].message);
+                } else {
+                    console.log("Tweet liked.");
+                }
             });
 
             const tweet_request_options = {
@@ -74,7 +79,12 @@ function getWebhook(req, res){
             }
 
             request.post(tweet_request_options, function (error, response, body) {
-                console.log("Answered");
+                console.log("Replying tweet.")
+                if(JSON.parse(response.body).errors){
+                    console.log(JSON.parse(response.body).errors[0].message);
+                } else {
+                    console.log("Tweet replied.");
+                }
             });
         }
     }
