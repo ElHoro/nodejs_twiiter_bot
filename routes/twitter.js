@@ -9,5 +9,6 @@ api.post('/twitter/webhook', TwitterController.getWebhook);
 api.post('/twitter/webhook/register', TwitterController.registerWebhook);
 api.get('/twitter/webhook/subscribe', TwitterController.subscribeToWebhook);
 api.delete('/twitter/webhook', TwitterController.removeWebhook);
+api.put('/twitter/webhook', TwitterController.activateWebhook);
 
 module.exports = api;

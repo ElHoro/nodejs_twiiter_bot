@@ -127,12 +127,34 @@ function removeWebhook(req, res){
         if (response.statusCode == 204) {
             console.log('Webhook removed.')
         } else {
-            console.log('Something went wrong.')
+            console.log('Something went wrong.');
+            console.log(body);
         }
     })
 
     res.status(200).send({'done':'done'});
 }
+
+function activateWebhook(req, res){
+    console.log("Activating hook");
+
+    const request_options = {
+        url: 'https://api.twitter.com/1.1/account_activity/all/dev/webhooks/'+req.query.id+'.json',
+        oauth: twitter_oauth
+    }
+
+    request.put(request_options, function (error, response, body) {
+        if (response.statusCode == 204) {
+            console.log("Hook activated");
+        } else {
+            console.log("Couldn't activate hook.");
+            console.log(body);
+        }
+    })
+
+    res.status(200).send({'done':'done'});
+}
+
 
 function subscribeToWebhook(req, res){
     // request options
@@ -145,7 +167,8 @@ function subscribeToWebhook(req, res){
         if (response.statusCode == 204) {
             console.log('Subscription added.')
         } else {
-            console.log('User has not authorized your app.')
+            console.log('User has not authorized your app.');
+            console.log(body);
         }
     });
 
@@ -157,5 +180,6 @@ module.exports = {
   getWebhook,
   registerWebhook,
   subscribeToWebhook,
-  removeWebhook
+  removeWebhook,
+  activateWebhook
 }
