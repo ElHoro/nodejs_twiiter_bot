@@ -38,7 +38,7 @@ function webhookChallenge(req, res){
   console.log('webhook received ' + crcToken);
   var response = getChallengeResponse(crcToken, process.env.CONSUMER_SECRET)
 
-  res.status(200).send({'response_TOKEN': 'sha256='+response});
+  res.status(200).send({'response_token': 'sha256='+response});
 }
 
 function getWebhook(req, res){
