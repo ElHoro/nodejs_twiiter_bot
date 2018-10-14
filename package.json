@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Mike Huitrado",
   "license": "MIT",
@@ -20,7 +20,9 @@
   },
   "devDependencies": {
     "jest": "^23.6.0",
-    "nodemon": "^1.11.0"
+    "jest-express": "^1.8.0",
+    "nodemon": "^1.11.0",
+    "supertest": "^3.3.0"
   },
   "engines": {
     "node": "4.7.1"

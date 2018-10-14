@@ -1,8 +1,5 @@
 'use strict'
 const crypto = require('crypto');
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').load();
-}
 const request = require('request');
 
 const twitter_oauth = {
@@ -10,9 +7,9 @@ const twitter_oauth = {
     consumer_secret: process.env.CONSUMER_SECRET,
     token: process.env.ACCESS_TOKEN,
     token_secret: process.env.ACCESS_TOKEN_SECRET
-  }
+    }
 
-let getAnswer = function(){
+function getAnswer(){
     let answerNumber = Math.floor((Math.random() * 3) + 1);
 
     switch(answerNumber) {
