@@ -1,3 +1,10 @@
 language: node_js
 node_js:
- - "10.12.0"
+- 10.12.0
+deploy:
+  provider: heroku
+  app: the-leviosa-bot
+  on:
+    repo: ElHoro/nodejs_twitter_bot
+  api_key:
+    secure: JxWkyVz8++2NEiM3f9McclExtWeLKjIAvSXbefY1D+D7zc6pb37WByDjO+7hBUehe4s++SCps7R7p85G5OQ+lFJxrgOC/Xu8m/1X6UGJ49uYjvdhHn6eLAcXKqyJNdIPhixPukWh4xYqSunnYZ1u4W8DDr+rdaldNBTBEPur+aWYXB1VcubWRLtX0Gbb13Qe2ST4874N4WaAgnwOGEgrX7kpRdjHpnyI9qFbrwpHg9YwedZflTmrK/EPYXGuRnXei9sNXo+vIVljgHCx2GD0ucjoWowm+r5v/8rlZZa9iqSp6pgsyGzGL4zLEPdZ1I4A6MI8T0zYEOHjELx4rhTthxpt4EwfaonZSkEB4A/YHlWcigTCS5ceyAl7qR0QXuXwgp61/pkZQKP5x7+lc1aqr9fN/6219+PyP8lNhHjWy489gcLWK6I+K/plI95O/MHRl51WNqOPdt9aD5jjS2jX4r8D0e+8H2u148Lnzv+39AQ7EbvgOqMwRxfSKpYWkQBYavAQgxIgWngriw2sXMgV31bdmwXtYzHS8K0FMaB02n6lFvkYSilg7bXChUp/Dak6TBQMwutUm0I0K072ZQGClTrJVo5DHGXcafOdMjkTJiyKaK894+5hXYd8wsm0eCHOUnPwR7gFe6bCKU0iupsXy06RxDZPtZ6rj5X076JoZ4Y=
